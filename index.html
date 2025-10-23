@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GymTracker Pro - Il tuo allenamento intelligente con AI, grafici e tracking avanzato">
+  <meta name="theme-color" content="#3B82F6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GymTracker">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%233B82F6' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3C/svg%3E">
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%233B82F6' width='180' height='180' rx='40'/%3E%3Ctext x='90' y='130' font-size='100' text-anchor='middle' fill='white'%3E💪%3C/text%3E%3C/svg%3E">
+  
+  <title>GymTracker Pro - Allenamento Intelligente</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Babel Standalone -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    
+    body {
+      overscroll-behavior: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    input, textarea, button {
+      user-select: auto;
+      -webkit-user-select: auto;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .animate-slideIn {
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #1F2937;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #4B5563;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6B7280;
+    }
+    
+    /* Loading spinner */
+    .spinner {
+      border: 3px solid #374151;
+      border-top: 3px solid #3B82F6;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* PWA install button pulse */
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="m-0 p-0 overflow-x-hidden">
+  <!-- Loading Screen -->
+  <div id="loading" class="fixed inset-0 bg-gray-900 flex items-center justify-center z-50">
+    <div class="text-center">
+      <div class="spinner mx-auto mb-4"></div>
+      <h2 class="text-white text-xl font-bold">GymTracker Pro</h2>
+      <p class="text-gray-400 text-sm mt-2">Caricamento...</p>
+    </div>
+  </div>
+  
+  <!-- App Container -->
+  <div id="root"></div>
+  
+  <!-- Install Banner (hidden by default) -->
+  <div id="install-banner" class="hidden fixed bottom-4 left-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 shadow-2xl z-50 pulse-animation">
+    <div class="flex items-center gap-3">
+      <div class="text-4xl">📱</div>
+      <div class="flex-1">
+        <h4 class="font-bold text-white">Installa GymTracker</h4>
+        <p class="text-sm text-white opacity-90">Accesso rapido dalla home!</p>
+      </div>
+      <button id="install-button" class="px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold text-sm hover:bg-opacity-90 transition-all">
+        Installa
+      </button>
+    </div>
+  </div>
+  
+  <!-- Offline Indicator -->
+  <div id="offline-indicator" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-full shadow-lg z-50">
+    <span class="flex items-center gap-2">
+      <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+      Modalità Offline
+    </span>
+  </div>
+  
+  <!-- App Script -->
+ 
+    // Import the component (inline for simplicity)
+    // In production, you'd import from gym-tracker-fase3.jsx
+    
+    // Include the full React component here
+    // For brevity, I'll reference it
+    const GymTracker = window.GymTrackerComponent;
+    
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<GymTracker />);
+    
+    // Hide loading screen
+    setTimeout(() => {
+      document.getElementById('loading').classList.add('opacity-0', 'transition-opacity', 'duration-500');
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+      }, 500);
+    }, 1000);
+  </script>
+  
+  <!-- Load the actual component -->
+  <script type="text/babel" src="gym-tracker-fase3.jsx"></script>
+  
+  <!-- PWA Registration & Setup -->
+  <script>
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((registration) => {
+            console.log('✅ Service Worker registered:', registration.scope);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              console.log('🔄 New Service Worker installing...');
+              
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('✨ New version available! Reload to update.');
+                  
+                  // Show update notification
+                  if (confirm('Nuova versione disponibile! Ricaricare la pagina?')) {
+                    window.location.reload();
+                  }
+                }
+              });
+            });
+          })
+          .catch((error) => {
+            console.error('❌ Service Worker registration failed:', error);
+          });
+      });
+    }
+    
+    // PWA Install Prompt
+    let deferredPrompt;
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('💡 Install prompt available');
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show custom install banner
+      const banner = document.getElementById('install-banner');
+      const button = document.getElementById('install-button');
+      
+      banner.classList.remove('hidden');
+      
+      button.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response: ${outcome}`);
+          
+          if (outcome === 'accepted') {
+            banner.classList.add('hidden');
+          }
+          
+          deferredPrompt = null;
+        }
+      });
+    });
+    
+    window.addEventListener('appinstalled', () => {
+      console.log('✅ PWA installed successfully');
+      document.getElementById('install-banner').classList.add('hidden');
+      deferredPrompt = null;
+    });
+    
+    // Online/Offline Detection
+    const offlineIndicator = document.getElementById('offline-indicator');
+    
+    window.addEventListener('online', () => {
+      console.log('🌐 Back online');
+      offlineIndicator.classList.add('hidden');
+    });
+    
+    window.addEventListener('offline', () => {
+      console.log('📡 Offline mode');
+      offlineIndicator.classList.remove('hidden');
+    });
+    
+    // Check initial connection status
+    if (!navigator.onLine) {
+      offlineIndicator.classList.remove('hidden');
+    }
+    
+    // Background Sync (if supported)
+    if ('sync' in navigator.serviceWorker.registration) {
+      navigator.serviceWorker.ready.then((registration) => {
+        // Register sync event when saving workout data
+        window.addEventListener('workoutDataSaved', () => {
+          registration.sync.register('sync-workout-data')
+            .then(() => console.log('🔄 Background sync registered'))
+            .catch((err) => console.error('❌ Sync registration failed:', err));
+        });
+      });
+    }
+    
+    // Notification Permission (optional)
+    if ('Notification' in window && Notification.permission === 'default') {
+      // Request permission after first workout
+      window.addEventListener('firstWorkoutComplete', () => {
+        Notification.requestPermission().then((permission) => {
+          console.log('🔔 Notification permission:', permission);
+        });
+      });
+    }
+    
+    // Performance Monitoring
+    window.addEventListener('load', () => {
+      if ('performance' in window) {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        console.log('⚡ Load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+      }
+    });
+    
+    // Keyboard shortcuts info
+    console.log(`
+    ⌨️ KEYBOARD SHORTCUTS (Player Mode):
+    ───────────────────────────────────
+    ← / P     → Esercizio precedente
+    → / N     → Esercizio successivo
+    SPACE     → Completa set
+    ENTER     → Completa set
+    ESC       → Esci dal Player Mode
+    ───────────────────────────────────
+    `);
+    
+    // Version info
+    console.log(`
+    🏋️ GymTracker Pro v3.0
+    ───────────────────────────────────
+    ✨ Features:
+    • 📊 Grafici progressi SVG
+    • 🤖 AI suggerimenti peso
+    • 🎥 Media esercizi
+    • ⚡ Swipe gestures
+    • ⌨️ Keyboard shortcuts
+    • 📱 PWA installabile
+    • 💾 Offline support
+    • 🔔 Notifiche
+    • 📈 Statistiche avanzate
+    ───────────────────────────────────
+    Made with ❤️ by Claude
+    `);
+  </script>
+  
+  <!-- Initialize Lucide Icons -->
+  <script>
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

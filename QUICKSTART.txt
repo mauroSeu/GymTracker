@@ -1,0 +1,149 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   🏋️  GYMTRACKER PRO - FASE 3 - QUICK START GUIDE          ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📦 FILES INCLUSI
+─────────────────────────────────────────────────────────────────
+✅ gym-tracker-fase3.jsx    → Componente React principale
+✅ index.html               → HTML con PWA setup
+✅ manifest.json            → PWA manifest
+✅ service-worker.js        → Service Worker per offline
+✅ README.md                → Documentazione completa
+✅ QUICKSTART.txt           → Questo file
+
+
+🚀 AVVIO RAPIDO (3 PASSI)
+─────────────────────────────────────────────────────────────────
+
+OPZIONE 1: Python (più semplice)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Apri il terminale nella cartella del progetto
+2. Esegui: python -m http.server 8000
+3. Apri browser: http://localhost:8000
+
+
+OPZIONE 2: Node.js
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Installa: npm install -g http-server
+2. Esegui: http-server -p 8000
+3. Apri browser: http://localhost:8000
+
+
+OPZIONE 3: VS Code Live Server
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Installa "Live Server" extension
+2. Click destro su index.html
+3. Seleziona "Open with Live Server"
+
+
+OPZIONE 4: Doppio Click (limitato)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Doppio click su index.html
+2. ⚠️ PWA non funzionerà (serve HTTPS o localhost)
+3. ✅ Resto dell'app funziona normalmente
+
+
+📱 INSTALLAZIONE MOBILE
+─────────────────────────────────────────────────────────────────
+1. Deploy su hosting (Netlify, Vercel, GitHub Pages)
+2. Apri l'URL dal tuo smartphone
+3. Click sul banner "Installa" che appare
+4. L'app sarà aggiunta alla home screen! 🎉
+
+
+✨ FEATURES PRINCIPALI
+─────────────────────────────────────────────────────────────────
+📊 GRAFICI
+   • Volume totale per settimana
+   • Progressione peso per esercizio
+   • Statistiche real-time
+
+🤖 AI SUGGERIMENTI
+   • Click "AI" accanto al peso
+   • Analisi automatica storico
+   • Suggerimenti intelligenti
+
+🎥 MEDIA ESERCIZI
+   • Aggiungi video YouTube
+   • Salva immagini di riferimento
+   • Click icona 🎥 su ogni esercizio
+
+⚡ SWIPE & SHORTCUTS
+   • Swipe → Cambia giorno
+   • Keyboard shortcuts in Player Mode:
+     ← / P = Indietro
+     → / N = Avanti
+     SPACE/ENTER = Completa set
+     ESC = Esci
+
+📱 PWA
+   • Installabile su tutti i device
+   • Funziona offline
+   • Notifiche timer riposo
+   • Background sync
+
+
+🎮 PRIME AZIONI
+─────────────────────────────────────────────────────────────────
+1. ⚙️  Apri Settings → Configura audio/vibrazione
+2. 💪 Seleziona il tuo workout del giorno
+3. ✏️  Imposta i pesi per ogni esercizio
+4. ▶️  Click "Player Mode" per iniziare
+5. ✅ Completa le serie una alla volta
+6. 📊 Alla fine, vedi i grafici dei progressi!
+
+
+🔧 TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────
+❌ PWA non si installa?
+   → Serve HTTPS o localhost (non file://)
+   → Usa un server locale (vedi opzioni sopra)
+
+❌ Grafici vuoti?
+   → Normale! Completa almeno 1 workout
+   → I dati si popolano automaticamente
+
+❌ Dati persi?
+   → Attenzione a "Clear Browsing Data" del browser
+   → I dati sono in localStorage (locale)
+   → Futuro: Export/Import backup
+
+
+📖 DOCUMENTAZIONE COMPLETA
+─────────────────────────────────────────────────────────────────
+Leggi README.md per:
+• Dettagli tecnici
+• API reference
+• Customizzazione
+• Best practices
+• Roadmap
+
+
+💡 TIPS
+─────────────────────────────────────────────────────────────────
+✓ Imposta pesi accurati per suggerimenti AI migliori
+✓ Aggiungi note per tracciare sensazioni
+✓ Usa i media per riferimento tecnica
+✓ Installa come PWA per accesso rapido
+✓ Abilita vibrazioni per feedback tattile
+
+
+🎯 OBIETTIVO
+─────────────────────────────────────────────────────────────────
+Track every workout. Trust the process. Watch your gains! 💪
+
+
+🆘 SUPPORT
+─────────────────────────────────────────────────────────────────
+Problemi? Domande? Suggerimenti?
+→ Apri un issue su GitHub
+→ Consulta la documentazione completa
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Made with ❤️ by Claude | v3.0 FASE 3 | October 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 Happy Training!
