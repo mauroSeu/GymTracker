@@ -1,8 +1,9 @@
 const CACHE_NAME = 'gym-tracker-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  '/GymTracker/',           // La radice del progetto
+  '/GymTracker/index.html',
+  '/GymTracker/manifest.json'
+  // Aggiungi qui anche /GymTracker/gym-tracker-fase3.jsx
 ];
 
 // Install event - cache assets
