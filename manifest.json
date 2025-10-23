@@ -2,7 +2,7 @@
   "name": "GymTracker Pro",
   "short_name": "GymTracker",
   "description": "Il tuo allenamento intelligente con AI e tracking avanzato",
-  "start_url": "mauroseu.github.io/",
+  "start_url": "https://mauroseu.github.io/GymTracker/",
   "display": "standalone",
   "background_color": "#111827",
   "theme_color": "#3B82F6",
